@@ -18,9 +18,9 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore src/EtsyOAuth1Authentication/EtsyOAuth1Authentication.csproj
     - name: Publish EtsyOAuth1Authentication
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
