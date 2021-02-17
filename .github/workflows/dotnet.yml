@@ -6,23 +6,36 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  PROJECT_PATH: 'src/EtsyOAuth1Authentication/EtsyOAuth1Authentication.csproj'
+  PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}\output
+  NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
+
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  deploy:
+    name: 'Deploy'
+    runs-on: 'windows-latest'
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+
+    - name: 'Install dotnet'
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore src/EtsyOAuth1Authentication/EtsyOAuth1Authentication.csproj
-    - name: Build
-      run: dotnet build --configuration Release --no-restore src/EtsyOAuth1Authentication/EtsyOAuth1Authentication.csproj
-    - name: Publish EtsyOAuth1Authentication
-      uses: brandedoutcast/publish-nuget@v2.5.2
-      with:
-          PROJECT_FILE_PATH: src/EtsyOAuth1Authentication/EtsyOAuth1Authentication.csproj
-          NUGET_KEY: ${{secrets.NUGETAPI}}
+        dotnet-version: 'netstandard2.0'
+
+    - name: 'Restore packages'
+      run: dotnet restore ${{ env.PROJECT_PATH }}
+
+    - name: 'Build project'
+      run: dotnet build ${{ env.PROJECT_PATH }} --no-restore --configuration Release
+
+    - name: 'Get Version'
+      id: version
+      uses: battila7/get-version-action@v2
+
+    - name: 'Pack project'
+      run: dotnet pack ${{ env.PROJECT_PATH }} --no-restore --no-build --configuration Release --include-symbols -p:PackageVersion=${{ steps.version.outputs.version-without-v }} --output ${{ env.PACKAGE_OUTPUT_DIRECTORY }}
+
+    - name: 'Push package'
+      run: dotnet nuget push ${{ env.PACKAGE_OUTPUT_DIRECTORY }}\*.nupkg -k ${{ secrets.NUGETAPI }} -s ${{ env.NUGET_SOURCE_URL }}
