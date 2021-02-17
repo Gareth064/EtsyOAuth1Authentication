@@ -1,4 +1,4 @@
-# Etsy OAuth1.0 Authenticator Library
+# Etsy OAuth1.0 Authentication
 
 EtsyOAuth1Authentication is a simple library which allows you to easily perform the first OAuth Authentication step in Etsys current API (v2)
 
