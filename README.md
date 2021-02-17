@@ -27,8 +27,10 @@ Once the app has been created you will be given a KEYSTRING and SHAREDSECRET
 You use these  for authenticating your app against Etsy's OAuth service and to recieve temporary tokens and a URL to call to ask the for permission to add your app to the users Etsy account.
 
 ### 5. Add this library to your solution and reference it in your project
-Download this project so you can reference it in any projects that need it.
-(Hopefully available as a Nuget Package soon)
+Install the package from NuGet
+```
+dotnet add package EtsyOAuth1Authentication --version 1.0.0
+```
 
 ### 6. Add the service (.Net Core Console App example)
 ```c#
