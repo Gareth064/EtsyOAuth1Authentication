@@ -49,7 +49,8 @@ string tempAccessSecret = "";
 string confirmUrl = etsyOauth.GetConfirmUrlWithTempTokens(
                 out tempAccessToken,
                 out tempAccessSecret,
-                new List<ScopesEnum> { ScopesEnum.listings_r, ScopesEnum.transactions_r }, "CALLBACKURL(OPTIONAL)");
+                new List<ScopesEnum> { ScopesEnum.listings_r, ScopesEnum.transactions_r },
+                "CALLBACKURL(OPTIONAL)");
 ```
 Scopes are documented on the Etsy developer portal
 https://www.etsy.com/developers/documentation/getting_started/oauth#section_permission_scopes
