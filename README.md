@@ -68,6 +68,10 @@ With these, you can call the following method which will give you the permenant 
 ```c#
 string permAccessToken = "";
 string permAccessSecret = "";
-oAuth.ObtainTokenCredentials(tempAccessToken, tempAccessSecret, verifyCode, out permAccessToken, out permAccessSecret);
+oAuth.ObtainTokenCredentials(tempAccessToken, 
+                             tempAccessSecret,
+                             verifyCode,
+                             out permAccessToken,
+                             out permAccessSecret);
 ```
 Store these tokens in a secure location as they are the keys to your or your users etsy data (Scopes dependant of course)
