@@ -2,6 +2,8 @@
 
 EtsyOAuth1Authentication is a simple library which allows you to easily perform the first OAuth Authentication step in Etsys current API (v2)
 
+[![Nuget](https://img.shields.io/nuget/v/EtsyOAuth1Authentication.svg)](https://www.nuget.org/packages/EtsyOAuth1Authentication/)
+
 ## Features
 - Built on the .Net Standard library for use in old and new .Net
 - Can be added as a service in the DI framework in .NET Core
